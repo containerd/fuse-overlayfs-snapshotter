@@ -16,29 +16,24 @@
    limitations under the License.
 */
 
-package overlay
+package fuseoverlayfs
 
 import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"os/exec"
 	"path/filepath"
 
 	"github.com/containerd/containerd/log"
 	"github.com/containerd/containerd/mount"
-	"github.com/containerd/continuity/fs"
 	"github.com/pkg/errors"
 )
 
-// supportsMultipleLowerDir checks if the system supports multiple lowerdirs,
-// which is required for the overlay snapshotter. On 4.x kernels, multiple lowerdirs
-// are always available (so this check isn't needed), and backported to RHEL and
-// CentOS 3.x kernels (3.10.0-693.el7.x86_64 and up). This function is to detect
-// support on those kernels, without doing a kernel version compare.
-//
-// Ported from moby overlay2.
-func supportsMultipleLowerDir(d string) error {
-	td, err := ioutil.TempDir(d, "multiple-lowerdir-check")
+// supportsReadonlyMultipleLowerDir checks if read-only multiple lowerdirs can be mounted with fuse-overlayfs.
+// https://github.com/containers/fuse-overlayfs/pull/133
+func supportsReadonlyMultipleLowerDir(d string) error {
+	td, err := ioutil.TempDir(d, "fuseoverlayfs-check")
 	if err != nil {
 		return err
 	}
@@ -48,21 +43,21 @@ func supportsMultipleLowerDir(d string) error {
 		}
 	}()
 
-	for _, dir := range []string{"lower1", "lower2", "upper", "work", "merged"} {
+	for _, dir := range []string{"lower1", "lower2", "merged"} {
 		if err := os.Mkdir(filepath.Join(td, dir), 0755); err != nil {
 			return err
 		}
 	}
 
-	opts := fmt.Sprintf("lowerdir=%s:%s,upperdir=%s,workdir=%s", filepath.Join(td, "lower2"), filepath.Join(td, "lower1"), filepath.Join(td, "upper"), filepath.Join(td, "work"))
+	opts := fmt.Sprintf("lowerdir=%s:%s", filepath.Join(td, "lower2"), filepath.Join(td, "lower1"))
 	m := mount.Mount{
-		Type:    "overlay",
+		Type:    "fuse3." + fuseoverlayfsBinary,
 		Source:  "overlay",
 		Options: []string{opts},
 	}
 	dest := filepath.Join(td, "merged")
 	if err := m.Mount(dest); err != nil {
-		return errors.Wrap(err, "failed to mount overlay")
+		return errors.Wrapf(err, "failed to mount fuse-overlayfs (%+v) on %s", m, dest)
 	}
 	if err := mount.UnmountAll(dest, 0); err != nil {
 		log.L.WithError(err).Warnf("Failed to unmount check directory %v", dest)
@@ -74,15 +69,14 @@ func supportsMultipleLowerDir(d string) error {
 // Supported is not called during plugin initialization, but exposed for downstream projects which uses
 // this snapshotter as a library.
 func Supported(root string) error {
+	if _, err := exec.LookPath(fuseoverlayfsBinary); err != nil {
+		return errors.Wrapf(err, "%s not installed", fuseoverlayfsBinary)
+	}
 	if err := os.MkdirAll(root, 0700); err != nil {
 		return err
 	}
-	supportsDType, err := fs.SupportsDType(root)
-	if err != nil {
-		return err
+	if err := supportsReadonlyMultipleLowerDir(root); err != nil {
+		return errors.Wrap(err, "fuse-overlayfs not functional, make sure running with kernel >= 4.18")
 	}
-	if !supportsDType {
-		return fmt.Errorf("%s does not support d_type. If the backing filesystem is xfs, please reformat with ftype=1 to enable d_type support", root)
-	}
-	return supportsMultipleLowerDir(root)
+	return nil
 }
