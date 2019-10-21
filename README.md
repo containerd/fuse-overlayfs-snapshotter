@@ -1,12 +1,12 @@
 # [`fuse-overlayfs`](https://github.com/containers/fuse-overlayfs) snapshotter plugin for [containerd](https://containerd.io)
 
 Unlike `overlayfs`, `fuse-overlayfs` can be used as a non-root user without patching the kernel.
-(But currently containerd and fuse-overlayfs need to be patched.)
+(But currently containerd need to be patched.)
 
 ## Requirements
 * kernel >= 4.18  (So this can't be tested in Travis CI, which uses kernel 4.15, as of October 2019)
 * containerd with [PR #3765](https://github.com/containerd/containerd/pull/3765)
-* fuse-overlayfs with [PR #133](https://github.com/containers/fuse-overlayfs/pull/133)
+* fuse-overlayfs >= [20191020](https://github.com/containers/fuse-overlayfs/commit/c9bbc94ab65467481ea0e0810eea8fd1bfd8a4bf)
 
 ## How to test
 
