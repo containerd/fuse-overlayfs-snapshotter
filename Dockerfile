@@ -1,6 +1,4 @@
-# https://github.com/containers/fuse-overlayfs/pull/133
-ARG FUSEOVERLAYFS_REPO=https://github.com/giuseppe/fuse-overlayfs.git
-ARG FUSEOVERLAYFS_COMMIT=c9bbc94ab65467481ea0e0810eea8fd1bfd8a4bf
+ARG FUSEOVERLAYFS_COMMIT=ae96c48f1a4f1a8c9f7170238b31c8246ce34b84
 ARG ROOTLESSKIT_COMMIT=v0.7.0
 ARG SHADOW_COMMIT=4.7
 
@@ -23,7 +21,7 @@ RUN git clone https://github.com/libfuse/libfuse && \
     ninja && \
     ninja install
 ARG FUSEOVERLAYFS_REPO
-RUN git clone ${FUSEOVERLAYFS_REPO}
+RUN git clone https://github.com/containers/fuse-overlayfs
 WORKDIR fuse-overlayfs
 ARG FUSEOVERLAYFS_COMMIT
 RUN git pull &&  git checkout ${FUSEOVERLAYFS_COMMIT}
