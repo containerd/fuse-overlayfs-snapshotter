@@ -17,7 +17,7 @@ github.com/Microsoft/hcsshim/internal/schema1
 github.com/Microsoft/hcsshim/internal/schema2
 github.com/Microsoft/hcsshim/internal/timeout
 github.com/Microsoft/hcsshim/internal/wclayer
-# github.com/containerd/containerd v0.0.0-00010101000000-000000000000 => github.com/AkihiroSuda/containerd v1.1.1-0.20191020052632-e9c211fd89d2
+# github.com/containerd/containerd v0.0.0-00010101000000-000000000000 => github.com/AkihiroSuda/containerd v1.1.1-0.20191212062816-cbf52e6f9154
 github.com/containerd/containerd/errdefs
 github.com/containerd/containerd/events
 github.com/containerd/containerd/events/exchange

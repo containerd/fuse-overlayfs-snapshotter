@@ -1,12 +1,6 @@
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
-github.com/AkihiroSuda/containerd v1.1.1-0.20191019163216-54a33eec6760 h1:Os/M4cP9SGyzYitUSyhXrFk0ogfIeKTBzkR5Klf5F+g=
-github.com/AkihiroSuda/containerd v1.1.1-0.20191019163216-54a33eec6760/go.mod h1:5IBP++IFtudvjLCXBrBPdXGu8s/AL9xiPCjz0K9psr4=
-github.com/AkihiroSuda/containerd v1.1.1-0.20191019164352-a6dd6aa708ab h1:DdLvkgW4fnn4t2G6iUqgzJN7CQIRWh/X//U9sUBFdfg=
-github.com/AkihiroSuda/containerd v1.1.1-0.20191019164352-a6dd6aa708ab/go.mod h1:5IBP++IFtudvjLCXBrBPdXGu8s/AL9xiPCjz0K9psr4=
-github.com/AkihiroSuda/containerd v1.1.1-0.20191020050244-0469cacda076 h1:uakXWILS0/ZI/XFySskOnVAlmrw8LbVN/gqpVATzfBc=
-github.com/AkihiroSuda/containerd v1.1.1-0.20191020050244-0469cacda076/go.mod h1:5IBP++IFtudvjLCXBrBPdXGu8s/AL9xiPCjz0K9psr4=
-github.com/AkihiroSuda/containerd v1.1.1-0.20191020052632-e9c211fd89d2 h1:P1crhhX1pWwIi4cOLpwUNVLu3EpakfwnRaeUWzjEibg=
-github.com/AkihiroSuda/containerd v1.1.1-0.20191020052632-e9c211fd89d2/go.mod h1:5IBP++IFtudvjLCXBrBPdXGu8s/AL9xiPCjz0K9psr4=
+github.com/AkihiroSuda/containerd v1.1.1-0.20191212062816-cbf52e6f9154 h1:sG0j7H0xn9w4nbLDzUe7tWLUTMGj2sj6Apsi1zB/FxI=
+github.com/AkihiroSuda/containerd v1.1.1-0.20191212062816-cbf52e6f9154/go.mod h1:5IBP++IFtudvjLCXBrBPdXGu8s/AL9xiPCjz0K9psr4=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/Microsoft/go-winio v0.4.14 h1:+hMXMk01us9KgxGb7ftKQt2Xpf5hH/yky+TDA+qxleU=
 github.com/Microsoft/go-winio v0.4.14/go.mod h1:qXqCSQ3Xa7+6tgxaGTIe4Kpcdsi+P8jBhyzoq1bpyYA=

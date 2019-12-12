@@ -107,6 +107,22 @@ func Unmount(target string, flags int) error {
 }
 
 func unmount(target string, flags int) error {
+	inf, err := Lookup(target)
+	if err != nil {
+		// UnmountAll() expects unix.EINVAL
+		return unix.EINVAL
+	}
+	// For FUSE mounts, attempting to execute fusermount helper binary is preferred
+	// https://github.com/containerd/containerd/pull/3765#discussion_r342083514
+	if strings.HasPrefix(inf.FSType, "fuse3.") || strings.HasPrefix(inf.FSType, "fuse.") {
+		for _, helperBinary := range []string{"fusermount3", "fusermount"} {
+			cmd := exec.Command(helperBinary, "-u", target)
+			if err := cmd.Run(); err == nil {
+				return nil
+			}
+			// ignore error and try unix.Unmount
+		}
+	}
 	for i := 0; i < 50; i++ {
 		if err := unix.Unmount(target, flags); err != nil {
 			switch err {

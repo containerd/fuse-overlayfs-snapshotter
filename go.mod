@@ -24,4 +24,4 @@ require (
 )
 
 // https://github.com/containerd/containerd/pull/3765
-replace github.com/containerd/containerd => github.com/AkihiroSuda/containerd v1.1.1-0.20191020052632-e9c211fd89d2
+replace github.com/containerd/containerd => github.com/AkihiroSuda/containerd v1.1.1-0.20191212062816-cbf52e6f9154
