@@ -106,15 +106,20 @@ func Unmount(target string, flags int) error {
 	return nil
 }
 
-func unmount(target string, flags int) error {
-	inf, err := Lookup(target)
-	if err != nil {
-		// UnmountAll() expects unix.EINVAL
-		return unix.EINVAL
+func isFUSE(dir string) (bool, error) {
+	// fuseSuperMagic is defined in statfs(2)
+	const fuseSuperMagic = 0x65735546
+	var st unix.Statfs_t
+	if err := unix.Statfs(dir, &st); err != nil {
+		return false, err
 	}
+	return st.Type == fuseSuperMagic, nil
+}
+
+func unmount(target string, flags int) error {
 	// For FUSE mounts, attempting to execute fusermount helper binary is preferred
 	// https://github.com/containerd/containerd/pull/3765#discussion_r342083514
-	if strings.HasPrefix(inf.FSType, "fuse3.") || strings.HasPrefix(inf.FSType, "fuse.") {
+	if ok, err := isFUSE(target); err == nil && ok {
 		for _, helperBinary := range []string{"fusermount3", "fusermount"} {
 			cmd := exec.Command(helperBinary, "-u", target)
 			if err := cmd.Run(); err == nil {
