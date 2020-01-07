@@ -30,7 +30,7 @@ import (
 )
 
 func newSnapshotter(ctx context.Context, root string) (snapshots.Snapshotter, func() error, error) {
-	snapshotter, err := NewSnapshotter(root, AsynchronousRemove)
+	snapshotter, err := NewSnapshotter(root)
 	if err != nil {
 		return nil, nil, err
 	}
