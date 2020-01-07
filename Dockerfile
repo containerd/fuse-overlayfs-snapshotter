@@ -9,22 +9,16 @@ ENV CGO_ENABLED=0
 ENV GO111MODULE=off
 RUN mkdir /out && go test -c -o /out/containerd-fuse-overlayfs.test
 
-# from https://github.com/containers/fuse-overlayfs/blob/v0.6.5/Dockerfile.static
-FROM registry.fedoraproject.org/fedora:30 AS fuse-overlayfs
-RUN dnf update -y && \
-    dnf install -y git make automake autoconf gcc glibc-static meson ninja-build clang
-RUN git clone https://github.com/libfuse/libfuse && \
-    cd libfuse && \
-    mkdir build && \
-    cd build && \
-    LDFLAGS="-lpthread" meson --prefix /usr -D default_library=static .. && \
-    ninja && \
-    ninja install
+# from https://github.com/containers/fuse-overlayfs/blob/53c17dab78b43de1cd121bf9260b20b76371bbaf/Dockerfile.static.ubuntu
+FROM docker.io/ubuntu:rolling AS fuse-overlayfs
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y \
+        git ca-certificates libc6-dev gcc g++ make automake autoconf clang pkgconf libfuse3-dev
 ARG FUSEOVERLAYFS_REPO
 RUN git clone https://github.com/containers/fuse-overlayfs
 WORKDIR fuse-overlayfs
 ARG FUSEOVERLAYFS_COMMIT
-RUN git pull &&  git checkout ${FUSEOVERLAYFS_COMMIT}
+RUN git pull && git checkout ${FUSEOVERLAYFS_COMMIT}
 RUN  ./autogen.sh && \
      LIBS="-ldl" LDFLAGS="-static" ./configure && \
      make && mkdir /out && cp fuse-overlayfs /out

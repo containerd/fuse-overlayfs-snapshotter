@@ -55,7 +55,7 @@ func init() {
 		InitFn: func(ic *plugin.InitContext) (interface{}, error) {
 			ic.Meta.Platforms = append(ic.Meta.Platforms, platforms.DefaultSpec())
 			ic.Meta.Exports["root"] = ic.Root
-			return NewSnapshotter(ic.Root, AsynchronousRemove)
+			return NewSnapshotter(ic.Root)
 		},
 	})
 }
@@ -72,6 +72,8 @@ type Opt func(config *SnapshotterConfig) error
 // the Cleanup method is called. Removals will make the snapshot
 // referred to by the key unavailable and make the key immediately
 // available for re-use.
+//
+// AsynchronousRemove is untested for fuse-overlayfs
 func AsynchronousRemove(config *SnapshotterConfig) error {
 	config.asyncRemove = true
 	return nil
