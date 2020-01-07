@@ -204,11 +204,12 @@ func (o *snapshotter) Mounts(ctx context.Context, key string) ([]mount.Mount, er
 		return nil, err
 	}
 	s, err := storage.GetSnapshot(ctx, key)
+	_, info, _, err := storage.GetInfo(ctx, key)
 	t.Rollback()
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to get active mount")
 	}
-	return o.mounts(s), nil
+	return o.mounts(s, info), nil
 }
 
 func (o *snapshotter) Commit(ctx context.Context, name, key string, opts ...snapshots.Opt) error {
@@ -423,12 +424,14 @@ func (o *snapshotter) createSnapshot(ctx context.Context, kind snapshots.Kind, k
 	}
 	td = ""
 
+	_, info, _, err := storage.GetInfo(ctx, key)
+
 	rollback = false
 	if err = t.Commit(); err != nil {
 		return nil, errors.Wrap(err, "commit failed")
 	}
 
-	return o.mounts(s), nil
+	return o.mounts(s, info), nil
 }
 
 func (o *snapshotter) prepareDirectory(ctx context.Context, snapshotDir string, kind snapshots.Kind) (string, error) {
@@ -450,7 +453,7 @@ func (o *snapshotter) prepareDirectory(ctx context.Context, snapshotDir string, 
 	return td, nil
 }
 
-func (o *snapshotter) mounts(s storage.Snapshot) []mount.Mount {
+func (o *snapshotter) mounts(s storage.Snapshot, info snapshots.Info) []mount.Mount {
 	if len(s.ParentIDs) == 0 {
 		// if we only have one layer/no parents then just return a bind mount as overlay
 		// will not work
@@ -496,6 +499,12 @@ func (o *snapshotter) mounts(s storage.Snapshot) []mount.Mount {
 	}
 
 	options = append(options, fmt.Sprintf("lowerdir=%s", strings.Join(parentPaths, ":")))
+	if mapping, ok := info.Labels["containerd.io/snapshot/uidmapping"]; ok {
+		options = append(options, fmt.Sprintf("uidmapping=%s", mapping))
+	}
+	if mapping, ok := info.Labels["containerd.io/snapshot/gidmapping"]; ok {
+		options = append(options, fmt.Sprintf("gidmapping=%s", mapping))
+	}
 	options = append(options, commonMountOptions...)
 	return []mount.Mount{
 		{
