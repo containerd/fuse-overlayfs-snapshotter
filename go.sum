@@ -6,10 +6,10 @@ github.com/Microsoft/go-winio v0.4.14/go.mod h1:qXqCSQ3Xa7+6tgxaGTIe4Kpcdsi+P8jB
 github.com/Microsoft/hcsshim v0.8.6 h1:ZfF0+zZeYdzMIVMZHKtDKJvLHj76XCuVae/jNkjj0IA=
 github.com/Microsoft/hcsshim v0.8.6/go.mod h1:Op3hHsoHPAvb6lceZHDtd9OkTew38wNoXnJs8iY7rUg=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
-github.com/containerd/containerd v1.3.1-0.20200106191539-b9fad5e310fa h1:jblCbV6679MHTMF9c/tJ3GfawbzLnQSfrWILmiUZlIM=
-github.com/containerd/containerd v1.3.1-0.20200106191539-b9fad5e310fa/go.mod h1:bC6axHOhabU15QhwfG7w5PipXdVtMXFTttgp+kVtyUA=
-github.com/containerd/continuity v0.0.0-20200101070350-669de920ecb0 h1:U5vKNUY+HrRMDSRuz6UUoz1aExMVjqxX8R2beEL2Ze4=
-github.com/containerd/continuity v0.0.0-20200101070350-669de920ecb0/go.mod h1:Dq467ZllaHgAtVp4p1xUQWBrFXR9s/wyoTpG8zOJGkY=
+github.com/containerd/containerd v1.3.1-0.20200219222124-986d06785c4a h1:YRp+0Asz1KDCsZu2vh+YlztOZMSk9frNHFEfA78n3PU=
+github.com/containerd/containerd v1.3.1-0.20200219222124-986d06785c4a/go.mod h1:bC6axHOhabU15QhwfG7w5PipXdVtMXFTttgp+kVtyUA=
+github.com/containerd/continuity v0.0.0-20200107194136-26c1120b8d41 h1:kIFnQBO7rQ0XkMe6xEwbybYHBEaWmh/f++laI6Emt7M=
+github.com/containerd/continuity v0.0.0-20200107194136-26c1120b8d41/go.mod h1:Dq467ZllaHgAtVp4p1xUQWBrFXR9s/wyoTpG8zOJGkY=
 github.com/containerd/ttrpc v0.0.0-20191028202541-4f1b8fe65a5c h1:+RqLdWzn0xFunb+sxXaEzHOg8NuEG/eaI+9C1xXX8Mw=
 github.com/containerd/ttrpc v0.0.0-20191028202541-4f1b8fe65a5c/go.mod h1:LPm1u0xBw8r8NOKoOdNMeVHSawSsltak+Ihv+etqsE8=
 github.com/containerd/typeurl v0.0.0-20190911142611-5eb25027c9fd h1:bRLyitWw3PT/2YuVaCKTPg0cA5dOFKFwKtkfcP2dLsA=

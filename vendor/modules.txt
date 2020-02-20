@@ -17,7 +17,7 @@ github.com/Microsoft/hcsshim/internal/schema1
 github.com/Microsoft/hcsshim/internal/schema2
 github.com/Microsoft/hcsshim/internal/timeout
 github.com/Microsoft/hcsshim/internal/wclayer
-# github.com/containerd/containerd v1.3.1-0.20200106191539-b9fad5e310fa
+# github.com/containerd/containerd v1.3.1-0.20200219222124-986d06785c4a
 github.com/containerd/containerd/api/services/snapshots/v1
 github.com/containerd/containerd/api/types
 github.com/containerd/containerd/contrib/snapshotservice
@@ -38,7 +38,7 @@ github.com/containerd/containerd/snapshots
 github.com/containerd/containerd/snapshots/storage
 github.com/containerd/containerd/snapshots/testsuite
 github.com/containerd/containerd/sys
-# github.com/containerd/continuity v0.0.0-20200101070350-669de920ecb0
+# github.com/containerd/continuity v0.0.0-20200107194136-26c1120b8d41
 github.com/containerd/continuity
 github.com/containerd/continuity/devices
 github.com/containerd/continuity/driver
