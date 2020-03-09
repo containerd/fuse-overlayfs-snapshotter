@@ -22,6 +22,7 @@ import (
 	"os"
 	"path/filepath"
 
+	sddaemon "github.com/coreos/go-systemd/v22/daemon"
 	"google.golang.org/grpc"
 
 	snapshotsapi "github.com/containerd/containerd/api/services/snapshots/v1"
@@ -75,6 +76,10 @@ func serve(address, root string) error {
 	l, err := net.Listen("unix", address)
 	if err != nil {
 		return err
+	}
+	if os.Getenv("NOTIFY_SOCKET") != "" {
+		sddaemon.SdNotify(false, sddaemon.SdNotifyReady)
+		defer sddaemon.SdNotify(false, sddaemon.SdNotifyStopping)
 	}
 	return rpc.Serve(l)
 }
