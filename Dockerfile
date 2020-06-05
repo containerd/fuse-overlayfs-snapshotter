@@ -1,6 +1,6 @@
-ARG FUSEOVERLAYFS_COMMIT=v0.7.7
-ARG ROOTLESSKIT_COMMIT=v0.9.1
-ARG SHADOW_COMMIT=4.7
+ARG FUSEOVERLAYFS_COMMIT=v1.0.0
+ARG ROOTLESSKIT_COMMIT=v0.9.5
+ARG SHADOW_COMMIT=4.8.1
 
 FROM golang:1.13-alpine AS containerd-fuse-overlayfs-test
 COPY . /go/src/github.com/AkihiroSuda/containerd-fuse-overlayfs
@@ -32,7 +32,7 @@ RUN git pull && git checkout ${ROOTLESSKIT_COMMIT}
 ENV CGO_ENABLED=0
 RUN mkdir /out && go build -o /out/rootlesskit github.com/rootless-containers/rootlesskit/cmd/rootlesskit 
 
-FROM alpine:3.11 AS idmap
+FROM alpine:3.12 AS idmap
 RUN apk add --no-cache autoconf automake build-base byacc gettext gettext-dev gcc git libcap-dev libtool libxslt
 RUN git clone https://github.com/shadow-maint/shadow.git
 WORKDIR shadow
@@ -41,7 +41,7 @@ RUN git pull && git checkout ${SHADOW_COMMIT}
 RUN ./autogen.sh --disable-nls --disable-man --without-audit --without-selinux --without-acl --without-attr --without-tcb --without-nscd && \
    make && mkdir -p /out && cp src/newuidmap src/newgidmap /out
 
-FROM alpine:3.11
+FROM alpine:3.12
 COPY --from=containerd-fuse-overlayfs-test /out/containerd-fuse-overlayfs.test /usr/local/bin
 COPY --from=rootlesskit /out/rootlesskit /usr/local/bin
 COPY --from=fuse-overlayfs /out/fuse-overlayfs /usr/local/bin
