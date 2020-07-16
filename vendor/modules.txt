@@ -21,9 +21,9 @@ github.com/Microsoft/hcsshim/internal/timeout
 github.com/Microsoft/hcsshim/internal/vmcompute
 github.com/Microsoft/hcsshim/internal/wclayer
 github.com/Microsoft/hcsshim/osversion
-# github.com/containerd/cgroups v0.0.0-20200625214700-544d8ea40afe
+# github.com/containerd/cgroups v0.0.0-20200710171044-318312a37340
 github.com/containerd/cgroups/stats/v1
-# github.com/containerd/containerd v1.4.0-beta.1.0.20200626174248-01a53c24b383
+# github.com/containerd/containerd v1.4.0-beta.2
 github.com/containerd/containerd/api/services/snapshots/v1
 github.com/containerd/containerd/api/types
 github.com/containerd/containerd/contrib/snapshotservice
@@ -44,7 +44,7 @@ github.com/containerd/containerd/snapshots
 github.com/containerd/containerd/snapshots/storage
 github.com/containerd/containerd/snapshots/testsuite
 github.com/containerd/containerd/sys
-# github.com/containerd/continuity v0.0.0-20200413184840-d3ef23f19fbb
+# github.com/containerd/continuity v0.0.0-20200710164510-efbc4488d8fe
 github.com/containerd/continuity
 github.com/containerd/continuity/devices
 github.com/containerd/continuity/driver
@@ -100,7 +100,7 @@ go.opencensus.io/internal
 go.opencensus.io/trace
 go.opencensus.io/trace/internal
 go.opencensus.io/trace/tracestate
-# golang.org/x/net v0.0.0-20200625001655-4c5254603344
+# golang.org/x/net v0.0.0-20200707034311-ab3426394381
 golang.org/x/net/http/httpguts
 golang.org/x/net/http2
 golang.org/x/net/http2/hpack
@@ -118,7 +118,7 @@ golang.org/x/text/secure/bidirule
 golang.org/x/text/transform
 golang.org/x/text/unicode/bidi
 golang.org/x/text/unicode/norm
-# google.golang.org/genproto v0.0.0-20200626011028-ee7919e894b5
+# google.golang.org/genproto v0.0.0-20200715011427-11fb19a81f2c
 google.golang.org/genproto/googleapis/rpc/status
 # google.golang.org/grpc v1.30.0
 google.golang.org/grpc
