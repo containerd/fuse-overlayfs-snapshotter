@@ -21,9 +21,9 @@ github.com/Microsoft/hcsshim/internal/timeout
 github.com/Microsoft/hcsshim/internal/vmcompute
 github.com/Microsoft/hcsshim/internal/wclayer
 github.com/Microsoft/hcsshim/osversion
-# github.com/containerd/cgroups v0.0.0-20200710171044-318312a37340
+# github.com/containerd/cgroups v0.0.0-20200817142730-0ab9c40440b0
 github.com/containerd/cgroups/stats/v1
-# github.com/containerd/containerd v1.4.0-rc.0
+# github.com/containerd/containerd v1.4.0
 github.com/containerd/containerd/api/services/snapshots/v1
 github.com/containerd/containerd/api/types
 github.com/containerd/containerd/contrib/snapshotservice
@@ -100,7 +100,7 @@ go.opencensus.io/internal
 go.opencensus.io/trace
 go.opencensus.io/trace/internal
 go.opencensus.io/trace/tracestate
-# golang.org/x/net v0.0.0-20200707034311-ab3426394381
+# golang.org/x/net v0.0.0-20200813134508-3edf25e44fcc
 golang.org/x/net/http/httpguts
 golang.org/x/net/http2
 golang.org/x/net/http2/hpack
@@ -109,7 +109,7 @@ golang.org/x/net/internal/timeseries
 golang.org/x/net/trace
 # golang.org/x/sync v0.0.0-20200625203802-6e8e738ad208
 golang.org/x/sync/errgroup
-# golang.org/x/sys v0.0.0-20200803210538-64077c9b5642
+# golang.org/x/sys v0.0.0-20200817085935-3ff754bf58a9
 golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix
 golang.org/x/sys/windows
@@ -118,7 +118,7 @@ golang.org/x/text/secure/bidirule
 golang.org/x/text/transform
 golang.org/x/text/unicode/bidi
 golang.org/x/text/unicode/norm
-# google.golang.org/genproto v0.0.0-20200804151602-45615f50871c
+# google.golang.org/genproto v0.0.0-20200815001618-f69a88009b70
 google.golang.org/genproto/googleapis/rpc/status
 # google.golang.org/grpc v1.31.0
 google.golang.org/grpc
