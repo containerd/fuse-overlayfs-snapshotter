@@ -2,7 +2,7 @@ ARG FUSEOVERLAYFS_COMMIT=v1.1.2
 ARG ROOTLESSKIT_COMMIT=v0.10.0
 ARG SHADOW_COMMIT=4.8.1
 
-FROM golang:1.13-alpine AS containerd-fuse-overlayfs-test
+FROM golang:1.15-alpine AS containerd-fuse-overlayfs-test
 COPY . /go/src/github.com/AkihiroSuda/containerd-fuse-overlayfs
 WORKDIR  /go/src/github.com/AkihiroSuda/containerd-fuse-overlayfs
 ENV CGO_ENABLED=0
@@ -23,7 +23,7 @@ RUN  ./autogen.sh && \
      LIBS="-ldl" LDFLAGS="-static" ./configure && \
      make && mkdir /out && cp fuse-overlayfs /out
 
-FROM golang:1.13-alpine AS rootlesskit
+FROM golang:1.15-alpine AS rootlesskit
 RUN apk add --no-cache git
 RUN git clone https://github.com/rootless-containers/rootlesskit.git /go/src/github.com/rootless-containers/rootlesskit
 WORKDIR /go/src/github.com/rootless-containers/rootlesskit
