@@ -20,6 +20,7 @@ package fuseoverlayfs
 
 import (
 	"context"
+	_ "crypto/sha256"
 	"io/ioutil"
 	"os"
 	"testing"
