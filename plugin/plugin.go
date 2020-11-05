@@ -18,8 +18,40 @@
 
 package fuseoverlayfs
 
+import (
+	"errors"
+
+	fuseoverlayfs "github.com/AkihiroSuda/containerd-fuse-overlayfs"
+	"github.com/containerd/containerd/platforms"
+	"github.com/containerd/containerd/plugin"
+)
+
 // Config represents configuration for the fuse-overlayfs plugin.
 type Config struct {
 	// Root directory for the plugin
 	RootPath string `toml:"root_path"`
+}
+
+func init() {
+	plugin.Register(&plugin.Registration{
+		Type:   plugin.SnapshotPlugin,
+		ID:     "fuse-overlayfs",
+		Config: &Config{},
+		InitFn: func(ic *plugin.InitContext) (interface{}, error) {
+			ic.Meta.Platforms = append(ic.Meta.Platforms, platforms.DefaultSpec())
+
+			config, ok := ic.Config.(*Config)
+			if !ok {
+				return nil, errors.New("invalid fuse-overlayfs configuration")
+			}
+
+			root := ic.Root
+			if config.RootPath != "" {
+				root = config.RootPath
+			}
+
+			ic.Meta.Exports["root"] = root
+			return fuseoverlayfs.NewSnapshotter(root)
+		},
+	})
 }
