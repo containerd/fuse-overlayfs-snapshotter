@@ -43,12 +43,24 @@ const (
 
 func init() {
 	plugin.Register(&plugin.Registration{
-		Type: plugin.SnapshotPlugin,
-		ID:   "fuse-overlayfs",
+		Type:   plugin.SnapshotPlugin,
+		ID:     "fuse-overlayfs",
+		Config: &Config{},
 		InitFn: func(ic *plugin.InitContext) (interface{}, error) {
 			ic.Meta.Platforms = append(ic.Meta.Platforms, platforms.DefaultSpec())
-			ic.Meta.Exports["root"] = ic.Root
-			return NewSnapshotter(ic.Root)
+
+			config, ok := ic.Config.(*Config)
+			if !ok {
+				return nil, errors.New("invalid fuse-overlayfs configuration")
+			}
+
+			root := ic.Root
+			if config.RootPath != "" {
+				root = config.RootPath
+			}
+
+			ic.Meta.Exports["root"] = root
+			return NewSnapshotter(root)
 		},
 	})
 }
