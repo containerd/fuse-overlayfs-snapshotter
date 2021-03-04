@@ -13,7 +13,8 @@ clean:
 	rm -rf bin
 
 test:
-	DOCKER_BUILDKIT=1 docker build -t containerd-fuse-overlayfs-test .
+	DOCKER_BUILDKIT=1 docker build -t containerd-fuse-overlayfs-test --build-arg FUSEOVERLAYFS_COMMIT=${FUSEOVERLAYFS_COMMIT} .
+	docker run --rm containerd-fuse-overlayfs-test fuse-overlayfs -V
 	docker run --rm --security-opt seccomp=unconfined --security-opt apparmor=unconfined --device /dev/fuse containerd-fuse-overlayfs-test
 	docker rmi containerd-fuse-overlayfs-test
 
