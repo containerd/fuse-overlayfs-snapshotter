@@ -23,16 +23,19 @@ import (
 	"path/filepath"
 
 	sddaemon "github.com/coreos/go-systemd/v22/daemon"
+	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 
 	snapshotsapi "github.com/containerd/containerd/api/services/snapshots/v1"
 	"github.com/containerd/containerd/contrib/snapshotservice"
 
 	fuseoverlayfs "github.com/AkihiroSuda/containerd-fuse-overlayfs"
+	"github.com/AkihiroSuda/containerd-fuse-overlayfs/cmd/containerd-fuse-overlayfs-grpc/version"
 )
 
 // main is from https://github.com/containerd/containerd/blob/b9fad5e310fafb453def5f1e7094f4c36a9806d2/PLUGINS.md
 func main() {
+	logrus.Infof("containerd-fuse-overlayfs-grpc Version=%q Revision=%q", version.Version, version.Revision)
 	// Provide a unix address to listen to, this will be the `address`
 	// in the `proxy_plugin` configuration.
 	// The root will be used to store the snapshots.
