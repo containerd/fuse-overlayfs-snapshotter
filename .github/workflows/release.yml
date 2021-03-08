@@ -1,0 +1,54 @@
+name: Release
+on:
+  push:
+    tags:
+    - 'v*'
+    - 'test-action-release-*'
+env:
+  GO111MODULE: on
+jobs:
+  release:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 20
+    steps:
+    - uses: actions/setup-go@v2
+      with:
+        go-version: 1.16.x
+    - uses: actions/checkout@v2
+      with:
+        path: go/src/github.com/AkihiroSuda/containerd-fuse-overlayfs
+    - name: "Compile binaries"
+      working-directory:  go/src/github.com/AkihiroSuda/containerd-fuse-overlayfs
+      run: make artifacts
+    - name: "SHA256SUMS"
+      working-directory:  go/src/github.com/AkihiroSuda/containerd-fuse-overlayfs
+      run: |
+        ( cd _output; sha256sum containerd-fuse-overlayfs-* ) | tee /tmp/SHA256SUMS
+        mv /tmp/SHA256SUMS _output/SHA256SUMS
+    - name: "The sha256sum of the SHA256SUMS file"
+      working-directory:  go/src/github.com/AkihiroSuda/containerd-fuse-overlayfs
+      run: (cd _output; sha256sum SHA256SUMS)
+    - name: "Prepare the release note"
+      working-directory:  go/src/github.com/AkihiroSuda/containerd-fuse-overlayfs
+      run: |
+        tag="${GITHUB_REF##*/}"
+        shasha=$(sha256sum _output/SHA256SUMS | awk '{print $1}')
+        cat <<-EOF | tee /tmp/release-note.txt
+        ${tag}
+
+        (To be documented)
+        - - -
+        The binaries were built automatically on GitHub Actions.
+        The build log is available for 90 days: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+        The sha256sum of the SHA256SUMS file itself is \`${shasha}\` .
+        EOF
+    - name: "Create release"
+      working-directory:  go/src/github.com/AkihiroSuda/containerd-fuse-overlayfs
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        tag="${GITHUB_REF##*/}"
+        asset_flags=()
+        for f in _output/*; do asset_flags+=("-a" "$f"); done
+        hub release create "${asset_flags[@]}" -F /tmp/release-note.txt --draft "${tag}"
