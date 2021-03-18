@@ -8,6 +8,8 @@ You do NOT need this `fuse-overlayfs` plugin on the following environments, beca
 - [Debian 10 kernel](https://salsa.debian.org/kernel-team/linux/blob/283390e7feb21b47779b48e0c8eb0cc409d2c815/debian/patches/debian/overlayfs-permit-mounts-in-userns.patch)
   - Debian 10 needs `sudo modprobe overlay permit_mounts_in_userns=1`. Future release of Debian with kernel >= 5.11 will not need this `modprobe` hack.
 
+fuse-overlayfs-snapshotter is a **non-core** sub-project of containerd.
+
 ## Requirements
 * kernel >= 4.18
 * containerd >= 1.4
@@ -146,3 +148,12 @@ To run the test as a non-root user, [RootlessKit](https://github.com/rootless-co
 ```console
 $ go test -exec rootlesskit -test.v -test.root
 ```
+
+## Project details
+fuse-overlayfs-snapshotter is a containerd **non-core** sub-project, licensed under the [Apache 2.0 license](./LICENSE).
+As a containerd non-core sub-project, you will find the:
+ * [Project governance](https://github.com/containerd/project/blob/master/GOVERNANCE.md),
+ * [Maintainers](./MAINTAINERS),
+ * and [Contributing guidelines](https://github.com/containerd/project/blob/master/CONTRIBUTING.md)
+
+information in our [`containerd/project`](https://github.com/containerd/project) repository.
