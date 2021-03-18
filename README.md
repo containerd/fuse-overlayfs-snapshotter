@@ -52,6 +52,37 @@ See https://github.com/containerd/containerd/blob/master/docs/rootless.md for ho
 
 ### Option 2: Execute `fuse-overlayfs` plugin as a separate binary
 
+#### "Easy way"
+
+The easiest way is to use `containerd-rootless-setuptool.sh` included in [nerdctl](https://github.com/containerd/nerdctl).
+
+```console
+$ containerd-rootless-setuptool.sh install
+$ containerd-rootless-setuptool.sh install-fuse-overlayfs
+[INFO] Creating "/home/exampleuser/.config/systemd/user/containerd-fuse-overlayfs.service"
+...
+[INFO] Installed "containerd-fuse-overlayfs.service" successfully.
+[INFO] To control "containerd-fuse-overlayfs.service", run: `systemctl --user (start|stop|restart) containerd-fuse-overlayfs.service`
+[INFO] Add the following lines to "/home/exampleuser/.config/containerd/config.toml" manually:
+### BEGIN ###
+[proxy_plugins]
+  [proxy_plugins."fuse-overlayfs"]
+    type = "snapshot"
+    address = "/run/user/1000/containerd-fuse-overlayfs.sock"
+###  END  ###
+[INFO] Set `export CONTAINERD_SNAPSHOTTER="fuse-overlayfs"` to use the fuse-overlayfs snapshotter.
+```
+
+Add the `[proxy_plugins."fuse-overlayfs"]` configuration shown above to `~/.config/containerd/config.toml`.
+"1000" needs to be replaced with your actual UID.
+
+#### "Hard way"
+
+<details>
+<summary>Click here to show the "hard way"</summary>
+
+<p>
+
 * Install `containerd-fuse-overlayfs-grpc` binary. The binary will be installed under `$DESTDIR/bin`.
 ```console
 $ make && DESTDIR=$HOME make install
@@ -96,12 +127,14 @@ $ nsenter -U --preserve-credentials -m -n -t $(cat $XDG_RUNTIME_DIR/rootlesskit-
   containerd -c $HOME/.config/containerd/config.toml
 ```
 
+</p>
+</details>
+
 ## Usage
 
 ```console
 $ export CONTAINERD_SNAPSHOTTER=fuse-overlayfs
-$ ctr pull ...
-$ ctr run ...
+$ nerdctl run ...
 ```
 
 ## How to test
