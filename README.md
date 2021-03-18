@@ -42,8 +42,7 @@ with the following content, and recompile the containerd binary:
 
 package main
 
-// NOTE: the package name was "github.com/AkihiroSuda/containerd-fuse-overlayfs" before v1.0.0
-import _ "github.com/AkihiroSuda/containerd-fuse-overlayfs/plugin"
+import _ "github.com/containerd/fuse-overlayfs-snapshotter/plugin"
 ```
 
 No extra configuration is needed.

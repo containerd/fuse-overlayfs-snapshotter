@@ -7,8 +7,8 @@ ARG DEBIAN_VERSION=10
 ARG ALPINE_VERSION=3.13
 
 FROM golang:${GO_VERSION}-alpine AS containerd-fuse-overlayfs-test
-COPY . /go/src/github.com/AkihiroSuda/containerd-fuse-overlayfs
-WORKDIR  /go/src/github.com/AkihiroSuda/containerd-fuse-overlayfs
+COPY . /go/src/github.com/containerd/fuse-overlayfs-snapshotter
+WORKDIR  /go/src/github.com/containerd/fuse-overlayfs-snapshotter
 ENV CGO_ENABLED=0
 ENV GO111MODULE=on
 RUN mkdir /out && go test -c -o /out/containerd-fuse-overlayfs.test

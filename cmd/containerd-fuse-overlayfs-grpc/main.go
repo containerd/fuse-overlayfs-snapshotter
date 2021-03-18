@@ -29,8 +29,8 @@ import (
 	snapshotsapi "github.com/containerd/containerd/api/services/snapshots/v1"
 	"github.com/containerd/containerd/contrib/snapshotservice"
 
-	fuseoverlayfs "github.com/AkihiroSuda/containerd-fuse-overlayfs"
-	"github.com/AkihiroSuda/containerd-fuse-overlayfs/cmd/containerd-fuse-overlayfs-grpc/version"
+	fuseoverlayfs "github.com/containerd/fuse-overlayfs-snapshotter"
+	"github.com/containerd/fuse-overlayfs-snapshotter/cmd/containerd-fuse-overlayfs-grpc/version"
 )
 
 // main is from https://github.com/containerd/containerd/blob/b9fad5e310fafb453def5f1e7094f4c36a9806d2/PLUGINS.md
