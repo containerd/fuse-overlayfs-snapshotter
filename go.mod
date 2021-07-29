@@ -3,7 +3,7 @@ module github.com/containerd/fuse-overlayfs-snapshotter
 go 1.16
 
 require (
-	github.com/containerd/containerd v1.5.2
+	github.com/containerd/containerd v1.5.4
 	github.com/containerd/continuity v0.1.0
 	github.com/coreos/go-systemd/v22 v22.1.0
 	github.com/pkg/errors v0.9.1
