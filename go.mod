@@ -10,6 +10,3 @@ require (
 	github.com/sirupsen/logrus v1.8.1
 	google.golang.org/grpc v1.33.2
 )
-
-// replace grpc to match https://github.com/containerd/containerd/blob/v1.5.2/go.mod
-replace google.golang.org/grpc => google.golang.org/grpc v1.27.1
