@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/setup-go@v2
       with:
-        go-version: 1.16.x
+        go-version: 1.17.x
     - uses: actions/checkout@v2
       with:
         path: src/github.com/containerd/fuse-overlayfs-snapshotter
@@ -27,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        fuse-overlayfs: [v1.0.0, v1.6, main]
+        fuse-overlayfs: [v1.0.0, v1.7.1, main]
     env:
       FUSEOVERLAYFS_COMMIT: "${{ matrix.fuse-overlayfs }}"
     steps:
