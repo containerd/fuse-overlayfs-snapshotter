@@ -27,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        fuse-overlayfs: [v1.0.0, v1.7.1, main]
+        fuse-overlayfs: [v1.0.0, v1.8, main]
     env:
       FUSEOVERLAYFS_COMMIT: "${{ matrix.fuse-overlayfs }}"
     steps:
