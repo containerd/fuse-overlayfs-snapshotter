@@ -58,7 +58,7 @@ uninstall:
 	$(RM) $(BINDIR)/containerd-fuse-overlayfs-grpc
 
 clean:
-	$(RM) -r $(CURDIR)/bin
+	$(RM) -r $(CURDIR)/bin $(CURDIR)/_output
 
 test:
 	DOCKER_BUILDKIT=1 $(DOCKER) build -t containerd-fuse-overlayfs-test --build-arg FUSEOVERLAYFS_COMMIT=${FUSEOVERLAYFS_COMMIT} .
