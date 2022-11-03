@@ -35,7 +35,7 @@ uninstall:
 	rm -f $(BINDIR)/containerd-fuse-overlayfs-grpc
 
 clean:
-	rm -rf bin
+	rm -rf $(CURDIR)/bin
 
 test:
 	DOCKER_BUILDKIT=1 docker build -t containerd-fuse-overlayfs-test --build-arg FUSEOVERLAYFS_COMMIT=${FUSEOVERLAYFS_COMMIT} .
@@ -50,15 +50,15 @@ TAR_FLAGS=--transform 's/.*\///g' --owner=0 --group=0
 
 artifacts: clean
 	mkdir -p _output
-	GOOS=linux GOARCH=amd64       make
-	tar $(TAR_FLAGS) -czvf _output/containerd-fuse-overlayfs-$(VERSION_TRIMMED)-linux-amd64.tar.gz  bin/*
-	GOOS=linux GOARCH=arm64       make
-	tar $(TAR_FLAGS) -czvf _output/containerd-fuse-overlayfs-$(VERSION_TRIMMED)-linux-arm64.tar.gz  bin/*
+	GOOS=linux GOARCH=amd64 make
+	tar $(TAR_FLAGS) -czvf _output/containerd-fuse-overlayfs-$(VERSION_TRIMMED)-linux-amd64.tar.gz $(CURDIR)/bin/*
+	GOOS=linux GOARCH=arm64 make
+	tar $(TAR_FLAGS) -czvf _output/containerd-fuse-overlayfs-$(VERSION_TRIMMED)-linux-arm64.tar.gz $(CURDIR)/bin/*
 	GOOS=linux GOARCH=arm GOARM=7 make
-	tar $(TAR_FLAGS) -czvf _output/containerd-fuse-overlayfs-$(VERSION_TRIMMED)-linux-arm-v7.tar.gz bin/*
-	GOOS=linux GOARCH=ppc64le     make
-	tar $(TAR_FLAGS) -czvf _output/containerd-fuse-overlayfs-$(VERSION_TRIMMED)-linux-ppc64le.tar.gz  bin/*
-	GOOS=linux GOARCH=s390x       make
-	tar $(TAR_FLAGS) -czvf _output/containerd-fuse-overlayfs-$(VERSION_TRIMMED)-linux-s390x.tar.gz  bin/*
+	tar $(TAR_FLAGS) -czvf _output/containerd-fuse-overlayfs-$(VERSION_TRIMMED)-linux-arm-v7.tar.gz $(CURDIR)/bin/*
+	GOOS=linux GOARCH=ppc64le make
+	tar $(TAR_FLAGS) -czvf _output/containerd-fuse-overlayfs-$(VERSION_TRIMMED)-linux-ppc64le.tar.gz $(CURDIR)/bin/*
+	GOOS=linux GOARCH=s390x make
+	tar $(TAR_FLAGS) -czvf _output/containerd-fuse-overlayfs-$(VERSION_TRIMMED)-linux-s390x.tar.gz $(CURDIR)/bin/*
 
 .PHONY: bin/containerd-fuse-overlayfs-grpc install uninstall clean test _test artifacts
