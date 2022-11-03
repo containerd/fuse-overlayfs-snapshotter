@@ -13,6 +13,7 @@
 #   limitations under the License.
 
 DESTDIR ?= /usr/local
+BINDIR ?= $(DESTDIR)/bin
 
 VERSION ?= $(shell git describe --match 'v[0-9]*' --dirty='.m' --always --tags)
 VERSION_TRIMMED := $(VERSION:v%=%)
@@ -28,10 +29,10 @@ bin/containerd-fuse-overlayfs-grpc:
 	$(GO_BUILD) -o $@ $(PKG_MAIN)
 
 install:
-	install bin/containerd-fuse-overlayfs-grpc $(DESTDIR)/bin
+	install -D -m 755 $(CURDIR)/bin/containerd-fuse-overlayfs-grpc $(BINDIR)/containerd-fuse-overlayfs-grpc
 
 uninstall:
-	rm -f $(DESTDIR)/bin/containerd-fuse-overlayfs-grpc
+	rm -f $(BINDIR)/containerd-fuse-overlayfs-grpc
 
 clean:
 	rm -rf bin
