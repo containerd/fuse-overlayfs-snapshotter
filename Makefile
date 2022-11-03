@@ -28,6 +28,8 @@ export GO_BUILD=GO111MODULE=on CGO_ENABLED=0 $(GO) build -ldflags "-s -w -X $(PK
 bin/containerd-fuse-overlayfs-grpc:
 	$(GO_BUILD) -o $@ $(PKG_MAIN)
 
+all: binaries
+
 help:
 	@echo "Usage: make <target>"
 	@echo
@@ -37,6 +39,8 @@ help:
 	@echo " * 'test'      - Run tests."
 	@echo " * 'clean'     - Clean artifacts."
 	@echo " * 'help'      - Show this help message."
+
+binaries: bin/containerd-fuse-overlayfs-grpc
 
 install:
 	install -D -m 755 $(CURDIR)/bin/containerd-fuse-overlayfs-grpc $(BINDIR)/containerd-fuse-overlayfs-grpc
