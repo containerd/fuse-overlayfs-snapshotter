@@ -61,4 +61,11 @@ artifacts: clean
 	GOOS=linux GOARCH=s390x make
 	tar $(TAR_FLAGS) -czvf _output/containerd-fuse-overlayfs-$(VERSION_TRIMMED)-linux-s390x.tar.gz $(CURDIR)/bin/*
 
-.PHONY: bin/containerd-fuse-overlayfs-grpc install uninstall clean test _test artifacts
+.PHONY: \
+	containerd-fuse-overlayfs-grpc \
+	install \
+	uninstall \
+	clean \
+	test \
+	_test \
+	artifacts
