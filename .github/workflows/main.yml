@@ -8,12 +8,12 @@ on:
 jobs:
   project:
     name: Project Checks
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     timeout-minutes: 20
     steps:
     - uses: actions/setup-go@v2
       with:
-        go-version: 1.17.x
+        go-version: 1.19.x
     - uses: actions/checkout@v3
       with:
         path: src/github.com/containerd/fuse-overlayfs-snapshotter
@@ -23,12 +23,12 @@ jobs:
         working-directory: src/github.com/containerd/fuse-overlayfs-snapshotter
 
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
-        fuse-overlayfs: [v1.0.0, v1.8.2, main]
+        fuse-overlayfs: [v1.0.0, v1.9, main]
     env:
       FUSEOVERLAYFS_COMMIT: "${{ matrix.fuse-overlayfs }}"
     steps:
@@ -36,11 +36,11 @@ jobs:
     - run: make test
 
   cross:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     timeout-minutes: 30
     steps:
     - uses: actions/setup-go@v2
       with:
-        go-version: 1.17.x
+        go-version: 1.19.x
     - uses: actions/checkout@v3
     - run: make artifacts
