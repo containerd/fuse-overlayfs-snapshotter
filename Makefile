@@ -84,16 +84,18 @@ ARTIFACT_NAME=containerd-fuse-overlayfs-$(VERSION_TRIMMED)
 
 artifacts: clean
 	$(MKDIR) -p _output
-	GOOS=linux GOARCH=amd64 make
+	GOOS=linux GOARCH=amd64 make -B
 	$(TAR) $(TAR_FLAGS) -czvf _output/$(ARTIFACT_NAME)-linux-amd64.tar.gz $(CURDIR)/bin/*
-	GOOS=linux GOARCH=arm64 make
+	GOOS=linux GOARCH=arm64 make -B
 	$(TAR) $(TAR_FLAGS) -czvf _output/$(ARTIFACT_NAME)-linux-arm64.tar.gz $(CURDIR)/bin/*
-	GOOS=linux GOARCH=arm GOARM=7 make
+	GOOS=linux GOARCH=arm GOARM=7 make -B
 	$(TAR) $(TAR_FLAGS) -czvf _output/$(ARTIFACT_NAME)-linux-arm-v7.tar.gz $(CURDIR)/bin/*
-	GOOS=linux GOARCH=ppc64le make
+	GOOS=linux GOARCH=ppc64le make -B
 	$(TAR) $(TAR_FLAGS) -czvf _output/$(ARTIFACT_NAME)-linux-ppc64le.tar.gz $(CURDIR)/bin/*
-	GOOS=linux GOARCH=s390x make
+	GOOS=linux GOARCH=s390x make -B
 	$(TAR) $(TAR_FLAGS) -czvf _output/$(ARTIFACT_NAME)-linux-s390x.tar.gz $(CURDIR)/bin/*
+	GOOS=linux GOARCH=riscv64 make -B
+	$(TAR) $(TAR_FLAGS) -czvf _output/$(ARTIFACT_NAME)-linux-riscv64.tar.gz $(CURDIR)/bin/*
 
 .PHONY: \
 	$(TARGET_BIN) \
