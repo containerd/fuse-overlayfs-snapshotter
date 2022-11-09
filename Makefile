@@ -94,6 +94,8 @@ artifacts: clean
 	$(TAR) $(TAR_FLAGS) -czvf _output/$(ARTIFACT_NAME)-linux-ppc64le.tar.gz $(CURDIR)/bin/*
 	GOOS=linux GOARCH=s390x make -B
 	$(TAR) $(TAR_FLAGS) -czvf _output/$(ARTIFACT_NAME)-linux-s390x.tar.gz $(CURDIR)/bin/*
+	GOOS=linux GOARCH=riscv64 make -B
+	$(TAR) $(TAR_FLAGS) -czvf _output/$(ARTIFACT_NAME)-linux-riscv64.tar.gz $(CURDIR)/bin/*
 
 .PHONY: \
 	$(TARGET_BIN) \
