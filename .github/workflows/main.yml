@@ -11,14 +11,14 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 20
     steps:
-    - uses: actions/setup-go@v2
+    - uses: actions/setup-go@v3
       with:
         go-version: 1.19.x
     - uses: actions/checkout@v3
       with:
         path: src/github.com/containerd/fuse-overlayfs-snapshotter
         fetch-depth: 25
-    - uses: containerd/project-checks@v1
+    - uses: containerd/project-checks@v1.1.0
       with:
         working-directory: src/github.com/containerd/fuse-overlayfs-snapshotter
 
@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 30
     steps:
-    - uses: actions/setup-go@v2
+    - uses: actions/setup-go@v3
       with:
         go-version: 1.19.x
     - uses: actions/checkout@v3
