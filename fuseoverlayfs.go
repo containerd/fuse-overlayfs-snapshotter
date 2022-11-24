@@ -181,9 +181,12 @@ func (o *snapshotter) Mounts(ctx context.Context, key string) ([]mount.Mount, er
 	if err != nil {
 		return nil, err
 	}
+	defer t.Rollback()
 	s, err := storage.GetSnapshot(ctx, key)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get snapshot %s from storage: %w", key, err)
+	}
 	_, info, _, err := storage.GetInfo(ctx, key)
-	t.Rollback()
 	if err != nil {
 		return nil, fmt.Errorf("failed to get active mount: %w", err)
 	}
