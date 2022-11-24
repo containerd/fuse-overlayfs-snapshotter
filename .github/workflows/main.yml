@@ -22,6 +22,25 @@ jobs:
       with:
         working-directory: src/github.com/containerd/fuse-overlayfs-snapshotter
 
+  linters:
+    name: Linters
+    permissions:
+      contents: read # for actions/checkout to fetch code
+      pull-requests: read # for golangci/golangci-lint-action to fetch pull requests
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: src/github.com/containerd/fuse-overlayfs-snapshotter
+      - uses: actions/setup-go@v5
+        with:
+          go-version: 1.21.x
+      - uses: golangci/golangci-lint-action@v6
+        with:
+          version: v1.63.4
+          working-directory: src/github.com/containerd/fuse-overlayfs-snapshotter
+
   test:
     runs-on: ubuntu-22.04
     timeout-minutes: 30
