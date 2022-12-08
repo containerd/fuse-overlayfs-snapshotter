@@ -3,7 +3,7 @@ module github.com/containerd/fuse-overlayfs-snapshotter
 go 1.19
 
 require (
-	github.com/containerd/containerd v1.6.9
+	github.com/containerd/containerd v1.6.12
 	github.com/containerd/continuity v0.3.0
 	github.com/coreos/go-systemd/v22 v22.5.0
 	github.com/sirupsen/logrus v1.9.0
@@ -12,7 +12,7 @@ require (
 
 require (
 	github.com/Microsoft/go-winio v0.5.2 // indirect
-	github.com/Microsoft/hcsshim v0.9.4 // indirect
+	github.com/Microsoft/hcsshim v0.9.5 // indirect
 	github.com/containerd/cgroups v1.0.3 // indirect
 	github.com/containerd/ttrpc v1.1.0 // indirect
 	github.com/containerd/typeurl v1.0.2 // indirect
