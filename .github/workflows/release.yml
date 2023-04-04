@@ -4,8 +4,11 @@ on:
     tags:
     - 'v*'
     - 'test-action-release-*'
+
 env:
   GO111MODULE: on
+  GO_VERSION: 1.20.x
+
 jobs:
   release:
     runs-on: ubuntu-22.04
@@ -13,7 +16,7 @@ jobs:
     steps:
     - uses: actions/setup-go@v3
       with:
-        go-version: 1.19.x
+        go-version: ${{ env.GO_VERSION }}
     - uses: actions/checkout@v3
       with:
         path: go/src/github.com/containerd/fuse-overlayfs-snapshotter

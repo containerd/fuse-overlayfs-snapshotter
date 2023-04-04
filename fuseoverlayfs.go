@@ -22,7 +22,6 @@ package fuseoverlayfs
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -182,9 +181,12 @@ func (o *snapshotter) Mounts(ctx context.Context, key string) ([]mount.Mount, er
 	if err != nil {
 		return nil, err
 	}
+	defer t.Rollback()
 	s, err := storage.GetSnapshot(ctx, key)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get snapshot %s from storage: %w", key, err)
+	}
 	_, info, _, err := storage.GetInfo(ctx, key)
-	t.Rollback()
 	if err != nil {
 		return nil, fmt.Errorf("failed to get active mount: %w", err)
 	}
@@ -414,7 +416,7 @@ func (o *snapshotter) createSnapshot(ctx context.Context, kind snapshots.Kind, k
 }
 
 func (o *snapshotter) prepareDirectory(ctx context.Context, snapshotDir string, kind snapshots.Kind) (string, error) {
-	td, err := ioutil.TempDir(snapshotDir, "new-")
+	td, err := os.MkdirTemp(snapshotDir, "new-")
 	if err != nil {
 		return "", fmt.Errorf("failed to create temp dir: %w", err)
 	}

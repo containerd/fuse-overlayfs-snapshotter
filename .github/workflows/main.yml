@@ -5,6 +5,10 @@ on:
   push:
     branches:
       - master
+
+env:
+  GO_VERSION: 1.20.x
+
 jobs:
   project:
     name: Project Checks
@@ -13,7 +17,7 @@ jobs:
     steps:
     - uses: actions/setup-go@v3
       with:
-        go-version: 1.19.x
+        go-version: ${{ env.GO_VERSION }}
     - uses: actions/checkout@v3
       with:
         path: src/github.com/containerd/fuse-overlayfs-snapshotter
@@ -21,6 +25,25 @@ jobs:
     - uses: containerd/project-checks@v1.1.0
       with:
         working-directory: src/github.com/containerd/fuse-overlayfs-snapshotter
+
+  linters:
+    name: Linters
+    permissions:
+      contents: read # for actions/checkout to fetch code
+      pull-requests: read # for golangci/golangci-lint-action to fetch pull requests
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          path: src/github.com/containerd/fuse-overlayfs-snapshotter
+      - uses: actions/setup-go@v3
+        with:
+          go-version: ${{ env.GO_VERSION }}
+      - uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.51.1
+          working-directory: src/github.com/containerd/fuse-overlayfs-snapshotter
 
   test:
     runs-on: ubuntu-22.04
@@ -41,6 +64,6 @@ jobs:
     steps:
     - uses: actions/setup-go@v3
       with:
-        go-version: 1.19.x
+        go-version: ${{ env.GO_VERSION }}
     - uses: actions/checkout@v3
     - run: make artifacts
