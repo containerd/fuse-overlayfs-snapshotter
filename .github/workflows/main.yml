@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 20
     steps:
-    - uses: actions/setup-go@v3
+    - uses: actions/setup-go@v4
       with:
-        go-version: 1.19.x
+        go-version: 1.20.x
     - uses: actions/checkout@v3
       with:
         path: src/github.com/containerd/fuse-overlayfs-snapshotter
@@ -28,7 +28,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        fuse-overlayfs: [v1.0.0, v1.9, main]
+        fuse-overlayfs: [v1.0.0, v1.11, main]
     env:
       FUSEOVERLAYFS_COMMIT: "${{ matrix.fuse-overlayfs }}"
     steps:
@@ -39,8 +39,8 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 30
     steps:
-    - uses: actions/setup-go@v3
+    - uses: actions/setup-go@v4
       with:
-        go-version: 1.19.x
+        go-version: 1.20.x
     - uses: actions/checkout@v3
     - run: make artifacts

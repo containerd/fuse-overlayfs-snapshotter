@@ -13,11 +13,11 @@
 #   limitations under the License.
 
 ARG FUSEOVERLAYFS_COMMIT=main
-ARG ROOTLESSKIT_COMMIT=v1.0.1
+ARG ROOTLESSKIT_COMMIT=v1.1.0
 
-ARG GO_VERSION=1.19
+ARG GO_VERSION=1.20
 ARG DEBIAN_VERSION=11
-ARG ALPINE_VERSION=3.16
+ARG ALPINE_VERSION=3.18
 
 FROM golang:${GO_VERSION}-alpine AS containerd-fuse-overlayfs-test
 COPY . /go/src/github.com/containerd/fuse-overlayfs-snapshotter
