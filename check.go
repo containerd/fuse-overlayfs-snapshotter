@@ -26,8 +26,8 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"github.com/containerd/containerd/log"
 	"github.com/containerd/containerd/mount"
+	"github.com/containerd/log"
 )
 
 // supportsReadonlyMultipleLowerDir checks if read-only multiple lowerdirs can be mounted with fuse-overlayfs.
