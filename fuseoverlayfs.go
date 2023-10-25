@@ -183,6 +183,9 @@ func (o *snapshotter) Mounts(ctx context.Context, key string) ([]mount.Mount, er
 		return nil, err
 	}
 	s, err := storage.GetSnapshot(ctx, key)
+	if err != nil {
+		return nil, err
+	}
 	_, info, _, err := storage.GetInfo(ctx, key)
 	t.Rollback()
 	if err != nil {
