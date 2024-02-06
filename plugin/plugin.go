@@ -22,9 +22,9 @@ package fuseoverlayfs
 import (
 	"errors"
 
-	"github.com/containerd/containerd/platforms"
-	"github.com/containerd/containerd/plugin"
 	fuseoverlayfs "github.com/containerd/fuse-overlayfs-snapshotter"
+	"github.com/containerd/platforms"
+	"github.com/containerd/plugin"
 )
 
 // Config represents configuration for the fuse-overlayfs plugin.
