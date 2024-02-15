@@ -7,7 +7,7 @@ require (
 	github.com/containerd/continuity v0.4.3
 	github.com/containerd/log v0.1.0
 	github.com/coreos/go-systemd/v22 v22.5.0
-	google.golang.org/grpc v1.61.0
+	google.golang.org/grpc v1.61.1
 )
 
 require (
