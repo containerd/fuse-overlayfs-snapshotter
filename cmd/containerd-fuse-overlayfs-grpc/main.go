@@ -22,8 +22,8 @@ import (
 	"os"
 	"path/filepath"
 
-	snapshotsapi "github.com/containerd/containerd/api/services/snapshots/v1"
-	"github.com/containerd/containerd/contrib/snapshotservice"
+	snapshotsapi "github.com/containerd/containerd/v2/api/services/snapshots/v1"
+	"github.com/containerd/containerd/v2/contrib/snapshotservice"
 	fuseoverlayfs "github.com/containerd/fuse-overlayfs-snapshotter"
 	"github.com/containerd/fuse-overlayfs-snapshotter/cmd/containerd-fuse-overlayfs-grpc/version"
 	"github.com/containerd/log"
