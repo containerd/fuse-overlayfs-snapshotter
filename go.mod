@@ -6,7 +6,7 @@ require (
 	github.com/containerd/containerd/v2 v2.0.0-rc.0
 	github.com/containerd/continuity v0.4.3
 	github.com/containerd/log v0.1.0
-	github.com/containerd/platforms v0.1.1
+	github.com/containerd/platforms v0.2.0
 	github.com/containerd/plugin v0.1.0
 	github.com/coreos/go-systemd/v22 v22.5.0
 	google.golang.org/grpc v1.63.2
