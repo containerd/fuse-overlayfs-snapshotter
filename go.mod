@@ -10,7 +10,7 @@ require (
 	github.com/containerd/platforms v0.2.1
 	github.com/containerd/plugin v0.1.0
 	github.com/coreos/go-systemd/v22 v22.5.0
-	google.golang.org/grpc v1.65.0
+	google.golang.org/grpc v1.66.0
 )
 
 require (
