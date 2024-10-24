@@ -1,4 +1,4 @@
-module github.com/containerd/fuse-overlayfs-snapshotter
+module github.com/containerd/fuse-overlayfs-snapshotter/v2
 
 go 1.22.0
 

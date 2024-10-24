@@ -23,7 +23,7 @@ import (
 	"errors"
 
 	"github.com/containerd/containerd/v2/plugins"
-	fuseoverlayfs "github.com/containerd/fuse-overlayfs-snapshotter"
+	fuseoverlayfs "github.com/containerd/fuse-overlayfs-snapshotter/v2"
 	"github.com/containerd/platforms"
 	"github.com/containerd/plugin"
 	"github.com/containerd/plugin/registry"
