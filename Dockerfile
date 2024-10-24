@@ -24,6 +24,7 @@ COPY . /go/src/github.com/containerd/fuse-overlayfs-snapshotter
 WORKDIR  /go/src/github.com/containerd/fuse-overlayfs-snapshotter
 ENV CGO_ENABLED=0
 ENV GO111MODULE=on
+RUN go build ./...
 RUN mkdir /out && go test -c -o /out/containerd-fuse-overlayfs.test
 
 # from https://github.com/containers/fuse-overlayfs/blob/53c17dab78b43de1cd121bf9260b20b76371bbaf/Dockerfile.static.ubuntu

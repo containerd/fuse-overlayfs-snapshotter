@@ -23,7 +23,7 @@ Choose 1 if you don't mind recompiling containerd, otherwise choose 2.
 
 ### Option 1: Embed `fuse-overlayfs` plugin into the containerd binary
 
-Create `builtins_fuseoverlayfs_linux.go` under [`$GOPATH/src/github.com/containerd/containerd/cmd/containerd`](https://github.com/containerd/containerd/tree/master/cmd/containerd)
+Create `builtins_fuseoverlayfs_linux.go` under [`$GOPATH/src/github.com/containerd/containerd/cmd/containerd/builtins`](https://github.com/containerd/containerd/tree/master/cmd/containerd/builtins)
 with the following content, and recompile the containerd binary:
 
 ```go
@@ -45,7 +45,7 @@ with the following content, and recompile the containerd binary:
 
 package main
 
-import _ "github.com/containerd/fuse-overlayfs-snapshotter/plugin"
+import _ "github.com/containerd/fuse-overlayfs-snapshotter/v2/plugin"
 ```
 
 No extra configuration is needed.

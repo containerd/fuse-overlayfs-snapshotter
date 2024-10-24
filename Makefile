@@ -31,8 +31,8 @@ VERSION ?= $(shell $(GIT) describe --match 'v[0-9]*' --dirty='.m' --always --tag
 VERSION_TRIMMED := $(VERSION:v%=%)
 REVISION ?= $(shell $(GIT) rev-parse HEAD)$(shell if ! $(GIT) diff --no-ext-diff --quiet --exit-code; then $(ECHO) .m; fi)
 
-PKG_MAIN := github.com/containerd/fuse-overlayfs-snapshotter/cmd/$(TARGET_BIN)
-PKG_VERSION := github.com/containerd/fuse-overlayfs-snapshotter/cmd/$(TARGET_BIN)/version
+PKG_MAIN := github.com/containerd/fuse-overlayfs-snapshotter/v2/cmd/$(TARGET_BIN)
+PKG_VERSION := github.com/containerd/fuse-overlayfs-snapshotter/v2/cmd/$(TARGET_BIN)/version
 
 export GO_BUILD=GO111MODULE=on CGO_ENABLED=0 $(GO) build -ldflags "-s -w -X $(PKG_VERSION).Version=$(VERSION) -X $(PKG_VERSION).Revision=$(REVISION)"
 

@@ -24,8 +24,8 @@ import (
 
 	snapshotsapi "github.com/containerd/containerd/api/services/snapshots/v1"
 	"github.com/containerd/containerd/v2/contrib/snapshotservice"
-	fuseoverlayfs "github.com/containerd/fuse-overlayfs-snapshotter"
-	"github.com/containerd/fuse-overlayfs-snapshotter/cmd/containerd-fuse-overlayfs-grpc/version"
+	fuseoverlayfs "github.com/containerd/fuse-overlayfs-snapshotter/v2"
+	"github.com/containerd/fuse-overlayfs-snapshotter/v2/cmd/containerd-fuse-overlayfs-grpc/version"
 	"github.com/containerd/log"
 	sddaemon "github.com/coreos/go-systemd/v22/daemon"
 	"google.golang.org/grpc"
