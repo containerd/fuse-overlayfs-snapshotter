@@ -22,9 +22,11 @@ package fuseoverlayfs
 import (
 	"errors"
 
+	"github.com/containerd/containerd/v2/plugins"
 	fuseoverlayfs "github.com/containerd/fuse-overlayfs-snapshotter"
 	"github.com/containerd/platforms"
 	"github.com/containerd/plugin"
+	"github.com/containerd/plugin/registry"
 )
 
 // Config represents configuration for the fuse-overlayfs plugin.
@@ -34,8 +36,8 @@ type Config struct {
 }
 
 func init() {
-	plugin.Register(&plugin.Registration{
-		Type:   plugin.SnapshotPlugin,
+	registry.Register(&plugin.Registration{
+		Type:   plugins.SnapshotPlugin,
 		ID:     "fuse-overlayfs",
 		Config: &Config{},
 		InitFn: func(ic *plugin.InitContext) (interface{}, error) {
@@ -46,7 +48,7 @@ func init() {
 				return nil, errors.New("invalid fuse-overlayfs configuration")
 			}
 
-			root := ic.Root
+			root := ic.Properties[plugins.PropertyRootDir]
 			if config.RootPath != "" {
 				root = config.RootPath
 			}
