@@ -1,6 +1,7 @@
 module github.com/containerd/fuse-overlayfs-snapshotter/v2
 
 go 1.22.0
+toolchain go1.22.9
 
 require (
 	github.com/containerd/containerd/api v1.8.0
@@ -10,7 +11,7 @@ require (
 	github.com/containerd/platforms v1.0.0-rc.0
 	github.com/containerd/plugin v1.0.0
 	github.com/coreos/go-systemd/v22 v22.5.0
-	google.golang.org/grpc v1.67.1
+	google.golang.org/grpc v1.68.0
 )
 
 require (
