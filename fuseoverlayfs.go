@@ -482,10 +482,10 @@ func (o *snapshotter) mounts(s storage.Snapshot, info snapshots.Info) []mount.Mo
 
 	options = append(options, fmt.Sprintf("lowerdir=%s", strings.Join(parentPaths, ":")))
 	if mapping, ok := info.Labels["containerd.io/snapshot/uidmapping"]; ok {
-		options = append(options, fmt.Sprintf("uidmapping=%s", mapping))
+		options = append(options, fmt.Sprintf("uidmapping=%s", convertIDMappingOption(mapping)))
 	}
 	if mapping, ok := info.Labels["containerd.io/snapshot/gidmapping"]; ok {
-		options = append(options, fmt.Sprintf("gidmapping=%s", mapping))
+		options = append(options, fmt.Sprintf("gidmapping=%s", convertIDMappingOption(mapping)))
 	}
 	return []mount.Mount{
 		{
@@ -508,4 +508,11 @@ func (o *snapshotter) workPath(id string) string {
 // Close closes the snapshotter
 func (o *snapshotter) Close() error {
 	return o.ms.Close()
+}
+
+// fuseIDMappingOption converts mapping entries joined with ',' to ':'
+// This is expected by the fuse-overlayfs program:
+// https://github.com/containers/fuse-overlayfs/blob/main/fuse-overlayfs.1.md
+func convertIDMappingOption(label string) string {
+	return strings.ReplaceAll(label, ",", ":")
 }
