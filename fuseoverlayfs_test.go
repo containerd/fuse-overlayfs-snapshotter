@@ -22,8 +22,6 @@ package fuseoverlayfs
 import (
 	"context"
 	_ "crypto/sha256"
-	"io/ioutil"
-	"os"
 	"testing"
 
 	"github.com/containerd/containerd/v2/core/snapshots"
@@ -42,11 +40,7 @@ func newSnapshotter(ctx context.Context, root string) (snapshots.Snapshotter, fu
 
 func TestFUSEOverlayFS(t *testing.T) {
 	testutil.RequiresRoot(t)
-	td, err := ioutil.TempDir("", "fuseoverlayfs-test")
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer os.RemoveAll(td)
+	td := t.TempDir()
 	if err := Supported(td); err != nil {
 		t.Skipf("fuse-overlayfs not supported: %v", err)
 	}
