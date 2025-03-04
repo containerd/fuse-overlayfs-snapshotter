@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/setup-go@v5
       with:
-        go-version: 1.21.x
+        go-version: 1.24.x
     - uses: actions/checkout@v4
       with:
         path: src/github.com/containerd/fuse-overlayfs-snapshotter
@@ -35,10 +35,10 @@ jobs:
           path: src/github.com/containerd/fuse-overlayfs-snapshotter
       - uses: actions/setup-go@v5
         with:
-          go-version: 1.21.x
+          go-version: 1.24.x
       - uses: golangci/golangci-lint-action@v6
         with:
-          version: v1.63.4
+          version: v1.64.6
           working-directory: src/github.com/containerd/fuse-overlayfs-snapshotter
 
   test:
@@ -60,6 +60,6 @@ jobs:
     steps:
     - uses: actions/setup-go@v5
       with:
-        go-version: 1.21.x
+        go-version: 1.24.x
     - uses: actions/checkout@v4
     - run: make artifacts
