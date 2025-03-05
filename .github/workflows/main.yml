@@ -18,7 +18,7 @@ jobs:
       with:
         path: src/github.com/containerd/fuse-overlayfs-snapshotter
         fetch-depth: 25
-    - uses: containerd/project-checks@v1.2.1
+    - uses: containerd/project-checks@v1.2.2
       with:
         working-directory: src/github.com/containerd/fuse-overlayfs-snapshotter
 
