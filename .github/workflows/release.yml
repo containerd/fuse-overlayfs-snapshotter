@@ -10,6 +10,12 @@ jobs:
   release:
     runs-on: ubuntu-22.04
     timeout-minutes: 20
+    # The maximum access is "read" for PRs from public forked repos
+    # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token
+    permissions:
+      contents: write  # for releases
+      id-token: write  # for provenances
+      attestations: write  # for provenances
     steps:
     - uses: actions/setup-go@v5
       with:
@@ -40,6 +46,10 @@ jobs:
 
         The sha256sum of the SHA256SUMS file itself is \`${shasha}\` .
         EOF
+    - uses: actions/attest-build-provenance@v2
+      with:
+        subject-path: |
+          _output/*
     - name: "Create release"
       working-directory:  go/src/github.com/containerd/fuse-overlayfs-snapshotter
       env:
