@@ -48,8 +48,7 @@ jobs:
         EOF
     - uses: actions/attest-build-provenance@v2
       with:
-        subject-path: |
-          _output/*
+        subject-path: _output/*
     - name: "Create release"
       working-directory:  go/src/github.com/containerd/fuse-overlayfs-snapshotter
       env:
