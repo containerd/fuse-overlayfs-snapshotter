@@ -4,13 +4,13 @@ go 1.23.0
 
 require (
 	github.com/containerd/containerd/api v1.9.0
-	github.com/containerd/containerd/v2 v2.1.1
+	github.com/containerd/containerd/v2 v2.1.2
 	github.com/containerd/continuity v0.4.5
 	github.com/containerd/log v0.1.0
 	github.com/containerd/platforms v1.0.0-rc.1
 	github.com/containerd/plugin v1.0.0
 	github.com/coreos/go-systemd/v22 v22.5.0
-	google.golang.org/grpc v1.72.1
+	google.golang.org/grpc v1.72.2
 )
 
 require (
