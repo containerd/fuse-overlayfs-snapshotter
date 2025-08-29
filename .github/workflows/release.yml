@@ -46,7 +46,7 @@ jobs:
 
         The sha256sum of the SHA256SUMS file itself is \`${shasha}\` .
         EOF
-    - uses: actions/attest-build-provenance@v2
+    - uses: actions/attest-build-provenance@v3
       with:
         subject-path: go/src/github.com/containerd/fuse-overlayfs-snapshotter/_output/*
     - name: "Create release"
